@@ -6,13 +6,39 @@ using System.Threading.Tasks;
 
 namespace CarRental
 {
-    class Sucursales
+    class Sucursal
     {
-        Int32 numero;
-        public Sucursales(Int32 num)
+        
+        string nombre;
+        string vec;
+        int horas;
+        persona t1;
+        insorg t2;
+        empresa t3;
+        string sucu;
+
+        public Sucursal(string n, string v, int h,  string su)
         {
-            numero = num;
+            nombre = n;
+            vec = v;
+            horas = h;
+            sucu = su;
         }
+        public void revisar()
+        {
+            if (t3.licencia != "A1")
+            {
+                
+                Console.WriteLine("No puede arrendar por permiso");
+            }
+      
+    
+        }
+       
+        //accesoriosd 
+        //suma total
+      
+        
 
     }
 }

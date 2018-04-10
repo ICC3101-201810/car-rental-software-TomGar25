@@ -8,24 +8,35 @@ namespace CarRental
 {
     class Clientes
     {
-        string nombre;
-        string vec;
-        Int32 horas;
-        string licencia;
-
-       
-        public Clientes(string nom, string vec1, Int32 h, string li)
-        {
-            nombre = nom;
-            vec = vec1;
-            horas = h;
-            licencia = li;
-
-        }
-        
-        
-            
-
+        public string nombre;
+        public string licencia;
 
     }
+    class persona : Clientes
+    {
+        public persona(string nom, string lic)
+        {
+            nombre = nom;
+            licencia = lic;
+        }
+
+    }
+    class insorg : Clientes
+    {
+        public insorg(string nom, string lic)
+        {
+            nombre = nom;
+            licencia = lic;
+        }
+    }
+    class empresa : Clientes
+    {
+        public empresa(string nom, string lic)
+        {
+            nombre = nom;
+            licencia = lic;
+        }
+    }
+
 }
+

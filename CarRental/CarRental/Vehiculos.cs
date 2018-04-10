@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace CarRental
 {
-    class Vehiculos
+    public class Vehiculos
     {
         
         string ve;
-        Int32 prehora;
+        int prehora;
         string licen;
-        public Vehiculos(string vehiculo, Int32 precio,string lic)
+        public Vehiculos(string vehiculo, int precio,string lic)
         {
             ve = vehiculo;
             prehora = precio;
-            licen = lic
+            licen = lic;
 
         }
         
@@ -27,7 +27,7 @@ namespace CarRental
 
 
 
-
     }
+
 }
 

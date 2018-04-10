@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0CA14C95-651A-4582-9743-4A8E590AC8C9}</ProjectGuid>
+    <ProjectGuid>{DC26D973-C64C-4ACE-B80E-E11C7A459D0B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CarRental</RootNamespace>
-    <AssemblyName>CarRental</AssemblyName>
+    <RootNamespace>ConsoleApp1</RootNamespace>
+    <AssemblyName>ConsoleApp1</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,12 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clientes.cs" />
-    <Compile Include="Sucursales.cs" />
-    <Compile Include="Vehiculos.cs" />
-    <Compile Include="..\..\lab4\Program.cs">
-      <Link>Program.cs</Link>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
