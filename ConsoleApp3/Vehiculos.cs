@@ -22,10 +22,16 @@ namespace ConsoleApp3
         {
             return this.licen;
         }
+        public string getnombre()
+        {
+            return this.ve;
+        }
 
         public void impirmir()
         {
+            Console.BackgroundColor = ConsoleColor.White;
             Console.WriteLine("tipo de vehiculo: " + ve + ", precio: " + prehora + ", tipo lic. : " + licen);
+            Console.ResetColor();
         }
 
     }

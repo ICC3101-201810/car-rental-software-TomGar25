@@ -10,18 +10,20 @@ namespace ConsoleApp3
     {
         string nombre;
         string vec;
-        int horas;
-        persona t1;
-        
-        empresa t3;
+        string horas;
         string sucu;
 
-        public Sucursal(string n, string v, int h, string su)
+        public Sucursal(string n, string v, string h, string su)
         {
             nombre = n;
             vec = v;
             horas = h;
             sucu = su;
+        }
+        public void imp()
+        {
+
+            Console.WriteLine(nombre, "Arrendo ");
         }
         
         

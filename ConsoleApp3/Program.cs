@@ -20,6 +20,7 @@ namespace ConsoleApp3
                 return false;
             }
         }
+
         static void Main(string[] args)
         {
             LinkedList<Vehiculos> vehiculo = new LinkedList<Vehiculos>();
@@ -33,27 +34,39 @@ namespace ConsoleApp3
 
 
             LinkedList<string> suc = new LinkedList<string>();
+            star2:
 
             Console.WriteLine("Bienvenid@, Ingrese numero de sucursal");
             string a = Console.ReadLine();
+
 
             bool a1 = suc.Contains(a);
             if (a1 == false)
             {
                 suc.AddLast(a);
             }
+            Console.Beep();
             Console.WriteLine("¿desea agregar vehiculos? (1)si (2)no");
             string b = Console.ReadLine();
+            if (b == "2")
+            {
+                goto star1;
+            }
             while (b == "1")
             {
-                Console.WriteLine("tipo de vehiculo, auto - camion - bus - moto - maq pesada");
+                Console.WriteLine("tipo de vehiculo\n auto\n camion\n bus\n moto\n maq pesada\n Ingrese:");
                 string b1 = Console.ReadLine();
+                if (b1 == "auto")
+                {
+
+                }
                 Console.WriteLine("precio hora");
                 string b2 = Console.ReadLine();
                 int b22 = int.Parse(b2);
                 Console.WriteLine("tipo licencia, respectivo; B, A1, A2, C, A3 ");
                 string b3 = Console.ReadLine();
                 Vehiculos nuevo = new Vehiculos(b1, b22, b3);
+                vehiculo.AddFirst(nuevo);
 
                 Console.WriteLine("Desea agregar otro?(1)si(2)no");
                 string b4 = Console.ReadLine();
@@ -62,21 +75,27 @@ namespace ConsoleApp3
                     break;
                 }
             }
+            star1:
+            Console.Clear();
             foreach (Vehiculos i in vehiculo)
             {
-                Console.WriteLine(i);
+                i.impirmir();
+
             }
 
 
             Console.WriteLine("¿desea arrendar un vehiculo? (1)si (2)no");
             string c = Console.ReadLine();
+            if (c == "2")
+            {
+                Console.WriteLine("muchas gracias!");
+                goto star2;
+            }
+            otroarrendado:
+
             Console.WriteLine("tipo de vehiculo; auto - camion - bus - moto - maq pesada");
             string c3 = Console.ReadLine();
-            string c13;
-            if (c3 == "auto")
-            {
-                c13 = "B";
-            }
+            string c13 = "B";
             if (c3 == "camion")
             {
                 c13 = "A1";
@@ -93,16 +112,18 @@ namespace ConsoleApp3
             {
                 c13 = "A3";
             }
-            Console.WriteLine("accesorios?(1)nada(2)silla guaguas (3)GPS");
-            string c9= Console.ReadLine();
-            Console.WriteLine("Cuantas horas?");
-            string c6 = Console.ReadLine();
-            int c7 = int.Parse(c6);
-            
-            if (c == "2")
+
+            if (c3 == "auto")
             {
-                Console.WriteLine("muchas gracias!");
+                Console.WriteLine("accesorios?(1)nada(2)asientos extra (3)electrico (4)maletero mas grandre (5)Reproductor dvd");
+                string c9 = Console.ReadLine();
             }
+
+            Console.WriteLine("Cuantas horas?");
+            string c7 = Console.ReadLine();
+
+
+
             while (c == "1")
             {
                 Console.WriteLine("nombre");
@@ -120,18 +141,18 @@ namespace ConsoleApp3
                         string c5 = Console.ReadLine();
                         empresa em1 = new empresa(c11, c5);
                         empl.AddLast(em1);
-                        /*
-                        bool re = Revisar(c13, c5 ); no entiendo pq no reconoce 13
+
+                        bool re = Revisar(c13, c5);
                         if (re != true)
                         {
                             Console.WriteLine("No tiene la licencia");
                             goto finish;
                         }
-                        */
+
                         if (c3 == "maq pesada")
                         {
                             Random rd = new Random();
-                            int rd2 = rd.Next(0,101);
+                            int rd2 = rd.Next(0, 101);
                             int rd1 = 63;
                             if (rd2 > rd1)
                             {
@@ -156,22 +177,49 @@ namespace ConsoleApp3
                         }
                         Sucursal na = new Sucursal(c11, c3, c7, a);
                         registro.AddFirst(na);
-                   
+                        foreach (Vehiculos tem in vehiculo)
+                        {
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
+                            {
+                                vehiculo.Remove(tem);
+                                break;
+                            }
+                        }
+
                     }
 
-                    if (c4 == "2") 
+                    if (c4 == "2") //persona
                     {
                         Console.WriteLine("Licencia:B,A1,C, A3");
                         string c5 = Console.ReadLine();
+                        bool re = Revisar(c13, c5);
                         persona per = new persona(c11, c5);
                         perl.AddLast(per);
+
+                        if (re == false)
+                        {
+                            Console.WriteLine("No tiene la licencia");
+                            goto finish;
+                        }
                         if (c3 == "bus")
                         {
                             Console.WriteLine("No puede arrendar ");
                         }
                         Sucursal na = new Sucursal(c11, c3, c7, a);
                         registro.AddFirst(na);
-                      
+                        foreach (Vehiculos tem in vehiculo)
+                        {
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
+                            {
+                                vehiculo.Remove(tem);
+                                break;
+                            }
+                        }
+
+                        
+
                     }
                     if (c4 == "3") //institucion
                     {
@@ -179,6 +227,12 @@ namespace ConsoleApp3
                         string c5 = Console.ReadLine();
                         institucion ins = new institucion(c11, c5);
                         insl.AddLast(ins);
+                        bool re = Revisar(c13, c5);
+                        if (re != true)
+                        {
+                            Console.WriteLine("No tiene la licencia");
+                            goto finish;
+                        }
                         if (c3 == "maq pesada")
                         {
                             Console.WriteLine("No puede arrendar ");
@@ -201,14 +255,30 @@ namespace ConsoleApp3
                         }
                         Sucursal na = new Sucursal(c11, c3, c7, a);
                         registro.AddFirst(na);
-                       
+                        foreach (Vehiculos tem in vehiculo)
+                        {
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
+                            {
+                                vehiculo.Remove(tem);
+                                break;
+                            }
+                        }
+
                     }
-                    if (c4 == "4")
+                    if (c4 == "4") //org
                     {
                         Console.WriteLine("permiso: B,A1, A2, C, A3");
                         string c5 = Console.ReadLine();
                         organizacion og = new organizacion(c11, c5);
                         orgl.AddLast(og);
+
+                        bool re = Revisar(c13, c5);
+                        if (re != true)
+                        {
+                            Console.WriteLine("No tiene la licencia");
+                            goto finish;
+                        }
                         if (c3 == "maq pesada")
                         {
                             Console.WriteLine("No puede arrendar ");
@@ -229,17 +299,43 @@ namespace ConsoleApp3
                         }
                         Sucursal na = new Sucursal(c11, c3, c7, a);
                         registro.AddFirst(na);
-                      
+                        foreach (Vehiculos tem in vehiculo)
+                        {
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
+                            {
+                                vehiculo.Remove(tem);
+                                break;
+                            }
+                        }
+
 
                     }
                 }
                 else
                 {
+                    string c5 = "";
                     Console.WriteLine("(1)Empresa(2)persona(3)intittucion (4)organizacion");
                     string c4 = Console.ReadLine();
-                    string licen;
+
                     if (c4 == "1")
                     {
+
+                        foreach (empresa j in empl)
+                        {
+                            string j1 = j.getnombre();
+                            if (c11 == j1)
+                            {
+                                c5 = j.getlicencia();
+                                break;
+                            }
+                        }
+                        bool re = Revisar(c13, c5);
+                        if (re != true)
+                        {
+                            Console.WriteLine("No tiene la licencia");
+                            goto finish;
+                        }
                         if (c3 == "maq pesada")
                         {
                             Random rd = new Random();
@@ -266,42 +362,73 @@ namespace ConsoleApp3
                                 string b1 = Console.ReadLine();
                             }
                         }
-                        foreach (empresa j in empl)
+
+
+                        Sucursal na = new Sucursal(c11, c3, c7, a);
+                        registro.AddFirst(na);
+                        foreach (Vehiculos tem in vehiculo)
                         {
-                            string j1 = j.getnombre();
-                            if (c11 ==  j1)
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
                             {
-                                licen = j.getlicencia();
+                                vehiculo.Remove(tem);
                                 break;
                             }
                         }
 
-                        Sucursal na = new Sucursal(c11, c3, c7, a);
-                        registro.AddFirst(na);
-                        
                     }
 
                     if (c4 == "2") //persona
                     {
-                        if (c3 == "bus")
-                        {
-                            Console.WriteLine("No puede arrendar ");
-                        }
                         foreach (persona j in perl)
                         {
                             string j1 = j.getnombre();
                             if (c11 == j1)
                             {
-                                licen = j.getlicencia();
+                                c5 = j.getlicencia();
                                 break;
                             }
                         }
+                        bool re = Revisar(c13, c5);
+                        if (re != true)
+                        {
+                            Console.WriteLine("No tiene la licencia");
+                            goto finish;
+                        }
+                        if (c3 == "bus")
+                        {
+                            Console.WriteLine("No puede arrendar ");
+                        }
+
                         Sucursal na = new Sucursal(c11, c3, c7, a);
                         registro.AddFirst(na);
-                     
+                        foreach (Vehiculos tem in vehiculo)
+                        {
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
+                            {
+                                vehiculo.Remove(tem);
+                                break;
+                            }
+                        }
                     }
                     if (c4 == "3") //institucion
                     {
+                        foreach (institucion j in insl)
+                        {
+                            string j1 = j.getnombre();
+                            if (c11 == j1)
+                            {
+                                c5 = j.getlicencia();
+                                break;
+                            }
+                        }
+                        bool re = Revisar(c13, c5);
+                        if (re != true)
+                        {
+                            Console.WriteLine("No tiene la licencia");
+                            goto finish;
+                        }
                         if (c3 == "maq pesada")
                         {
                             Console.WriteLine("No puede arrendar ");
@@ -321,22 +448,38 @@ namespace ConsoleApp3
                                 string b1 = Console.ReadLine();
                             }
                         }
-                            
-                        foreach (institucion j in insl)
+
+
+                        Sucursal na = new Sucursal(c11, c3, c7, a);
+                        registro.AddFirst(na);
+                        foreach (Vehiculos tem in vehiculo)
+                        {
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
+                            {
+                                vehiculo.Remove(tem);
+                                break;
+                            }
+                        }
+
+                    }
+                    if (c4 == "4") //organizacion
+                    {
+                        foreach (organizacion j in orgl)
                         {
                             string j1 = j.getnombre();
                             if (c11 == j1)
                             {
-                                licen = j.getlicencia();
+                                c5 = j.getlicencia();
                                 break;
                             }
                         }
-                        Sucursal na = new Sucursal(c11, c3, c7, a);
-                        registro.AddFirst(na);
-                       
-                    }
-                    if (c4 == "4") //organizacion
-                    {
+                        bool re = Revisar(c13, c5);
+                        if (re != true)
+                        {
+                            Console.WriteLine("No tiene la licencia");
+                            goto finish;
+                        }
                         if (c3 == "maq pesada")
                         {
                             Console.WriteLine("No puede arrendar ");
@@ -355,33 +498,45 @@ namespace ConsoleApp3
                                 string b1 = "normal";
                             }
                         }
-                        foreach (organizacion j in orgl)
+
+                        Sucursal na = new Sucursal(c11, c3, c7, a);
+                        registro.AddFirst(na);
+                        foreach (Vehiculos tem in vehiculo)
                         {
-                            string j1 = j.getnombre();
-                            if (c11 == j1)
+                            string veic = tem.getnombre();
+                            if (c3 == veic)
                             {
-                                licen = j.getlicencia();
+                                vehiculo.Remove(tem);
                                 break;
                             }
                         }
-                        Sucursal na = new Sucursal(c11, c3, c7, a);
-                        registro.AddFirst(na);
-                       
 
                     }
 
                 }
-                finish:
-                Console.WriteLine("otro?(1)si(2)no");
-                string g = Console.ReadLine();
-                if (g == "2")
-                {
-                    break;
-                }
+
+                //Console.Clear();
+                break;
             }
-            Console.WriteLine("");
+            finish:
+            Console.WriteLine("Arrendar otro?(1)si(2)no");
+            string g = Console.ReadLine();
+            if (g == "1")
+            {
+                goto otroarrendado;
+            }
+            Console.Clear();
+            foreach (Vehiculos i in vehiculo)
+            {
+                i.impirmir();
 
+            }
 
+            foreach (Sucursal im in registro)
+            {
+                im.imp();
+            }
+            Console.WriteLine("pulsar cualquier tecla para salir");
             Console.ReadLine();
         }
     }
